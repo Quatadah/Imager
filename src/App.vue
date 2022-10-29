@@ -1,23 +1,21 @@
-<template>
-  <v-app>
-    <v-main>
-      <HelloWorld/>
-    </v-main>
-  </v-app>
-</template>
+<script setup>
+import ImageGallery from "./components/ImageGallery.vue";
+import SideBar from "./components/SideBar.vue";
+import { ref } from "vue";
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+const coloredImages = ref(true);
 
-export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
-}
+const updateSelection = (isColored) => {
+    console.log(isColored);
+    coloredImages.value = isColored;
+};
 </script>
+
+<template>
+    <v-app theme="dark">
+        <SideBar @select-option="updateSelection" />
+        <v-main>
+            <ImageGallery :withColors="coloredImages" />
+        </v-main>
+    </v-app>
+</template>
